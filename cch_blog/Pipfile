@@ -1,0 +1,30 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[dev-packages]
+coverage = "*"
+watchdog = "*"
+"flake8" = "*"
+faker = "*"
+v = {editable = true,version = "*"}
+
+[packages]
+flask = "*"
+flask-ckeditor = "*"
+flask-mail = "*"
+flask-sqlalchemy = "*"
+flask-wtf = "*"
+flask-moment = "*"
+python-dotenv = "*"
+bootstrap-flask = "*"
+flask-login = "*"
+flask-debugtoolbar = "*"
+gunicorn = "*"
+flask-migrate = "*"
+psycopg2 = "==2.7.5"
+pymysql = "*"
+sqlalchemy = "*"
+flask-caching = "*"
+redis = "*"

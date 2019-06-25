@@ -1,0 +1,51 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    env_file: .env
+    container_name: web
+    restart: always
+    volumes:
+      - ./:/bdwms_blog
+    depends_on:
+      - db
+    networks:
+      - net
+    command: bash ./start_server.sh
+
+  db:
+    container_name: db
+    restart: always
+    networks:
+      - net
+    image: mysql:5.7
+    env_file: .env
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+    command: --character-set-server=utf8
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    restart: always
+    networks:
+      - net
+    depends_on:
+      - web
+    volumes:
+      - ./nginx/log:/var/log/nginx
+      - ./bdwms_blog/static:/opt/static
+    ports:
+      - "80:80"
+      - "443:443"
+  redis:
+    image: redis:3.2
+    restart: always
+    volumes:
+      - ./redis:/data
+    networks:
+      - net
+networks:
+  net:
